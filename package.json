@@ -27,10 +27,12 @@
   },
   "homepage": "https://github.com/monkdaf/get-image-from-site#readme",
   "dependencies": {
-    "gulp": "*"
+    "cheerio": "^0.22.0",
+    "debug": "^2.6.0",
+    "gulp": "*",
+    "node-fetch": "^1.6.3"
   },
   "devDependencies": {
-    "debug": "*",
     "babel-cli": "*",
     "babel-core": "*",
     "babel-eslint": "*",
