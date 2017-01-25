@@ -1,3 +1,9 @@
+temp
+/node_modules/
+*.log
+dist
+flow-typed
+.tern-port
 # Logs
 logs
 *.log
