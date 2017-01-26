@@ -1,10 +1,13 @@
+#!/usr/bin/env node
+// @flow
+
 import cheerio from 'cheerio';
 import debug from 'debug';
 import urlapi from 'url';
 
 const getProductListLog = debug('getProductList');
 
-const getProductList = (html) => {
+const getProductList = (html :string) => {
   if (!html) {
     getProductListLog('param "html" is empty');
     return [];
@@ -17,8 +20,9 @@ const getProductList = (html) => {
 
   links.each((i, link) => {
     const url = $(link).attr('href');
-    const name = urlapi.parse(url).pathname.split('/').pop();
-    // const name = `${namefile[0]}_${i}.${namefile[1]}`;
+    const path = urlapi.parse(url).pathname;
+    const name = !path ? '' : path.split('/').pop();
+
     getProductListLog('parse name "%s"', name);
     // console.log(`name=${name}`);
     const item = {

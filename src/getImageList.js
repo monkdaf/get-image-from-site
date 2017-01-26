@@ -1,16 +1,18 @@
+#!/usr/bin/env node
+// @flow
+
 import cheerio from 'cheerio';
 import debug from 'debug';
 import urlapi from 'url';
 
 const getImageListLog = debug('getImageList');
 
-const getImageList = (html) => {
+const getImageList = (html: string) => {
   if (!html) {
     getImageListLog('param "html" is empty');
     return [];
   }
   getImageListLog('param "html" is not empty');
-  // let lists = [{ name: 'testname', url: 'testurl' }, { name: 'testname2', url: 'testurl2' }];
   const list = [];
 
   const $ = cheerio.load(html);
@@ -18,7 +20,8 @@ const getImageList = (html) => {
 
   links.each((i, link) => {
     const url = $(link).attr('href');
-    const namefile = urlapi.parse(url).pathname.split('/').pop().split('.');
+    const path = urlapi.parse(url).pathname;
+    const namefile = !path ? '' : path.split('/').pop().split('.');
     const name = `${namefile[0]}_${i}.${namefile[1]}`;
     getImageListLog('parse name "%s"', name);
     // console.log(`name=${name}`);

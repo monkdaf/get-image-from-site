@@ -1,7 +1,7 @@
 install: install-deps install-flow-typed
 
 run:
-	npm run babel-node -- 'src/bin/getimages.js' list 'http://gyrotown.ru/product/giroskuter-hoverbot-a-16-krasnyy'
+	npm run babel-node -- 'src/bin/getImages.js' list 'http://gyrotown.ru/product/giroskuter-hoverbot-a-16-krasnyy'
 
 install-deps:
 	yarn

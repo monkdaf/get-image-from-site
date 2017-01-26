@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // @flow
 
 import getCountPages from '../src/getCountPages';
@@ -23,6 +24,6 @@ describe('Tests for getCountPages', () => {
   </ul><!-- /.list-inline -->
 </div><!-- /.pagination-container -->`;
   test('body have only one right tag', () => {
-  expect(getCountPages(sevenPages)).toBe(7);
+    expect(getCountPages(sevenPages)).toBe(7);
   });
 });

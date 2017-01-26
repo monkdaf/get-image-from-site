@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // @flow
 
 import getProductList from '../src/getProductList';

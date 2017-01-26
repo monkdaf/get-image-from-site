@@ -1,9 +1,12 @@
+#!/usr/bin/env node
+// @flow
+
 import cheerio from 'cheerio';
 import debug from 'debug';
 
 const getCountPagesLog = debug('getCountPages');
 
-const getCountPages = (html) => {
+const getCountPages = (html: string) => {
   if (!html) {
     getCountPagesLog('param "html" is empty');
     return 0;

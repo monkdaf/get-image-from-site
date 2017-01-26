@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // @flow
 
 import getImageList from '../src/getImageList';

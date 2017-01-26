@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @flow
 
 import fetch from 'node-fetch';
 import debug from 'debug';
