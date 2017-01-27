@@ -6,6 +6,12 @@ import debug from 'debug';
 
 const getCountPagesLog = debug('getCountPages');
 
+/**
+ * Get numbers of pages products from html data.
+ * @param {string} html Input html data
+ * @returns {Number} Return number of pages
+ */
+
 const getCountPages = (html: string) => {
   if (!html) {
     getCountPagesLog('param "html" is empty');

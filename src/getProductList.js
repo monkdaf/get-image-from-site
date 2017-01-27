@@ -7,7 +7,13 @@ import urlapi from 'url';
 
 const getProductListLog = debug('getProductList');
 
-const getProductList = (html :string) => {
+/**
+ * Get list of products from html data.
+ * @param {string} html Input html data
+ * @returns {Array} Return array of object with list of products
+ */
+
+const getProductList = (html: string) => {
   if (!html) {
     getProductListLog('param "html" is empty');
     return [];

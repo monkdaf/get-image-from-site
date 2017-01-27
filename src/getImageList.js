@@ -7,6 +7,12 @@ import urlapi from 'url';
 
 const getImageListLog = debug('getImageList');
 
+/**
+ * Get list of images from html data.
+ * @param {string} html Input html data
+ * @returns {Array} Return array of object with list of images
+ */
+
 const getImageList = (html: string) => {
   if (!html) {
     getImageListLog('param "html" is empty');

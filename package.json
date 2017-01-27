@@ -47,6 +47,8 @@
     "eslint-plugin-import": "*",
     "flow-bin": "^0.37",
     "flow-typed": "*",
-    "jest": "*"
+    "jest": "*",
+    "jsdoc": "^3.4.3",
+    "jsdoc-babel": "^0.3.0"
   }
 }

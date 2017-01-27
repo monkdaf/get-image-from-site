@@ -1,4 +1,5 @@
 temp
+out
 /node_modules/
 *.log
 dist
