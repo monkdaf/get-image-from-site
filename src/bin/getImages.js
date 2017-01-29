@@ -1,23 +1,36 @@
 #!/usr/bin/env node
 // @flow
 
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 import debug from 'debug';
-import fs from 'fs';
-import getImageList from '../getImageList';
+// import fs from 'fs';
+import getAllImages from '../getAllImages';
 import getAllProducts from '../getAllProducts';
+// import getCountPages from '../getCountPages';
 
 // console.log(half(Number(process.argv[process.argv.length - 1])));
 // console.log(`Arguments is (${process.argv.length}) ${process.argv}`);
 const command = process.argv[2];
-const patch = process.argv[3];
+const path = process.argv[3];
 
 const getImagesLog = debug('getImages');
 const errorLog = debug('error');
 
 
 if (command === 'list') {
-  console.log(getAllProducts(patch, 2));
+  getImagesLog('Start');
+  getAllProducts(path, 1, [])
+  .then((list) => {
+    getImagesLog('Count of products: %s', list.length);
+    return getAllImages(list);
+  })
+  .then((list) => {
+    getImagesLog('Count of images: %s', list.length);
+    // return getAllImages(list);
+  })
+  // .then(list => getImagesLog('Count of products: ', list.length))
+  // .then(list => getAllImages(list))
+  // console.log(`Answer: ${getAllProducts(patch, 2, [])}`);
 
   // // fetch(patch)
   // .then(res => res.text())
@@ -36,10 +49,10 @@ if (command === 'list') {
   //     getImagesLog('list.json is saved!');
   //   });
   // })
-  // .catch((err) => {
-  //   errorLog('Error is %s', err);
-  //   // console.error(err);
-  // });
+  .catch((err) => {
+    errorLog('Error is %s', err);
+    // console.error(err);
+  });
 }
 
 if (command === 'img') {

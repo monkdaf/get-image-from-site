@@ -11,42 +11,42 @@ const errorLog = debug('error');
 
 
 /**
- * Get list of products from html data.
+ * Get list of all products from url.
  * @param {string} url Input url pages with products
  * @param {Number} page current page
+ * @param {Array} prevList list of product on previos pages
  * @returns {Array} Return array of object with list of products
  */
 
-const getAllProducts = (url: string, page: Number) => {
+const getAllProducts = (url: string, page: Number, prevList: Array) => {
   getAllProductsLog('get page %s', page);
-  if (!page || page === 0) {
+  return new Promise((resolve, reject) => {
+    if (!page || page === 0) {
+      resolve(prevList);
+      return prevList;
+    }
+  // let commonList = [];
+    const fullUrl = page === 1 ? url : `${url}?page=${page}`;
+    getAllProductsLog('fullUrl is %s', fullUrl);
+    fetch(fullUrl)
+    .then(res => res.text())
+    .then(html => getProductList(html))
+    .then((list) => {
+      getAllProductsLog('list is %s', JSON.stringify(list, null, ' '));
+      return getAllProducts(url, page - 1, prevList.concat(list));
+    })
+    .then((list) => {
+      getAllProductsLog('commonlist is %s', JSON.stringify(list, null, ' '));
+      resolve(list);
+      // return list;
+    })
+    .catch((err) => {
+      errorLog('Error is %s', err);
+      // console.error(err);
+      reject(err);
+    });
     return [];
-  }
-  let commonList = [];
-  const fullUrl = page === 1 ? url : `${url}?page=${page}`;
-  getAllProductsLog('fullUrl is %s', fullUrl);
-  fetch(fullUrl)
-  .then(res => res.text())
-  .then(html => getProductList(html))
-  .then((list) => {
-    getAllProductsLog('list is %s', JSON.stringify(list, null, ' '));
-    return list;
-  })
-  .then(list => [...list, '###', getAllProducts(url, page - 1)])
-  .then((list) => {
-    getAllProductsLog('commonlist is %s', JSON.stringify(list, null, ' '));
-    return list;
-  })
-  .then((list) => {
-    commonList = list;
-  })
-  .catch((err) => {
-    errorLog('Error is %s', err);
-    // console.error(err);
   });
-  getAllProductsLog('Total commonlist is %s', JSON.stringify(commonList, null, ' '));
-  return commonList;
 };
-
 
 export default getAllProducts;
