@@ -25,7 +25,10 @@ const getProductList = (html: string) => {
   const links = $('a[class=image-cover]');
 
   links.each((i, link) => {
-    const url = $(link).attr('href');
+    let url = $(link).attr('href');
+    if (/http/.exec(url) === null) {
+      url = `http://gyrotown.ru${url}`;
+    }
     const path = urlapi.parse(url).pathname;
     const name = !path ? '' : path.split('/').pop();
 

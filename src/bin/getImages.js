@@ -26,6 +26,8 @@ if (command === 'list') {
   })
   .then((list) => {
     getImagesLog('Count of images: %s', list.length);
+    // getImagesLog('list of images: %s', list[0].name);
+    // console.log(list);
     // return getAllImages(list);
   })
   // .then(list => getImagesLog('Count of products: ', list.length))

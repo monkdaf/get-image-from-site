@@ -15,33 +15,19 @@ const errorLog = debug('error');
  * @returns {Array} Return array of object with list of images
  */
 
-function getAllImages(list: Array) {
+function getAllImages(list: [{name: string, url: string}]) {
   getAllImagesLog('Start');
   return new Promise((resolve, reject) => {
     if (!list || list === []) {
       resolve([]);
     }
-    // const imagesList = list.map((curr) => {
-    //   getAllImagesLog('processing %s', curr.name);
-    //   return getImageListFromUrl(curr.url);
-    //   // const listImg = getImageListFromUrl(curr.url);
-    //   // getAllImagesLog('listImg %s', listImg.toString());
-    //   // return prev.concat(listImg);
-    // }, []);
-    // const promiseList = list.map(item => getImageListFromUrl(item.url));
-    // getAllImagesLog('imagesList is %s', promiseList); // imagesList);
-// getAllImagesLog('list[0].url = %s', list[0].url);
-    getImageListFromUrl(list[0].url)
+    const promiseList = list.map(item => getImageListFromUrl(item.url));
+    Promise.all(promiseList)
+    .then(res => res.reduce((acc, item) => acc.concat(item)))
     .then((res) => {
       getAllImagesLog('resImagesList is %s', res);
+      resolve(res);
     })
-    .then(res => resolve(res))
-    // resolve(imagesList);
-    // Promise.all(promiseList)
-    // .then((res) => {
-    //   getAllImagesLog('resImagesList is %s', res);
-    //   resolve(res);
-    // })
     .catch((err) => {
       errorLog('Error is %s', err);
       // console.error(err);

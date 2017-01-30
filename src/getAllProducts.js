@@ -18,7 +18,7 @@ const errorLog = debug('error');
  * @returns {Array} Return array of object with list of products
  */
 
-const getAllProducts = (url: string, page: Number, prevList: Array) => {
+const getAllProducts = (url: string, page: number, prevList: [{name: string, url: string}]) => {
   getAllProductsLog('get page %s', page);
   return new Promise((resolve, reject) => {
     if (!page || page === 0) {

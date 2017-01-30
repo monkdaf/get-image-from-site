@@ -8,8 +8,8 @@ import getImageList from './getImageList';
 const getImageListFromUrlLog = debug('getImageListFromUrl');
 const errorLog = debug('error');
 
-const getImageListFromUrl = (url) => {
-  getImageListFromUrlLog('Start');
+const getImageListFromUrl = (url: string) => {
+  getImageListFromUrlLog('Start with url: %s', url);
   return new Promise((resolve, reject) => {
     fetch(url)
     .then(res => res.text())
