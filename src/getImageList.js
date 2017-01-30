@@ -13,7 +13,7 @@ const getImageListLog = debug('getImageList');
  * @returns {Array} Return array of object with list of images
  */
 
-const getImageList = (html: string) => {
+const getImageList = (nameProduct:string, html: string) => {
   if (!html) {
     getImageListLog('param "html" is empty');
     return [];
@@ -28,7 +28,8 @@ const getImageList = (html: string) => {
     const url = $(link).attr('href');
     const path = urlapi.parse(url).pathname;
     const namefile = !path ? '' : path.split('/').pop().split('.');
-    const name = `${namefile[0]}_${i}.${namefile[1]}`;
+    // const name = `${namefile[0]}_${i}.${namefile[1]}`;
+    const name = `${nameProduct}_${i}.${namefile[1]}`;
     getImageListLog('parse name "%s"', name);
     // console.log(`name=${name}`);
     const item = {

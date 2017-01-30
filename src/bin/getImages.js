@@ -6,6 +6,7 @@ import debug from 'debug';
 // import fs from 'fs';
 import getAllImages from '../getAllImages';
 import getAllProducts from '../getAllProducts';
+import downloadAllImages from '../downloadAllImages';
 // import getCountPages from '../getCountPages';
 
 // console.log(half(Number(process.argv[process.argv.length - 1])));
@@ -19,7 +20,7 @@ const errorLog = debug('error');
 
 if (command === 'list') {
   getImagesLog('Start');
-  getAllProducts(path, 1, [])
+  getAllProducts(path, 7, [])
   .then((list) => {
     getImagesLog('Count of products: %s', list.length);
     return getAllImages(list);
@@ -28,8 +29,9 @@ if (command === 'list') {
     getImagesLog('Count of images: %s', list.length);
     // getImagesLog('list of images: %s', list[0].name);
     // console.log(list);
-    // return getAllImages(list);
+    return list;
   })
+  .then(list => downloadAllImages(list))
   // .then(list => getImagesLog('Count of products: ', list.length))
   // .then(list => getAllImages(list))
   // console.log(`Answer: ${getAllProducts(patch, 2, [])}`);

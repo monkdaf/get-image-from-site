@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 // @flow
 
+// import fetch from 'node-fetch';
 import debug from 'debug';
+import downloadImage from './downloadImage';
 
-import getImageListFromUrl from './getImageListFromUrl';
-
-const getAllImagesLog = debug('getAllImages');
+const downloadAllImagesLog = debug('downloadAllImages');
 const errorLog = debug('error');
-
 
 /**
  * Get list of images from products list.
@@ -15,17 +14,18 @@ const errorLog = debug('error');
  * @returns {Array} Return array of object with list of images
  */
 
-function getAllImages(list: [{name: string, url: string}]) {
-  getAllImagesLog('Start');
+const downloadAllImages = (list: [{name: string, url: string}]) => {
+// const downloadAllImages = (url: string) => {
+  downloadAllImagesLog('Start');
   return new Promise((resolve, reject) => {
     if (!list || list === []) {
       resolve([]);
     }
-    const promiseList = list.map(item => getImageListFromUrl(item.name, item.url));
+    const promiseList = list.map(item => downloadImage(item.name, item.url));
     Promise.all(promiseList)
-    .then(res => res.reduce((acc, item) => acc.concat(item)))
+    // .then(res => res.reduce((acc, item) => acc.concat(item)))
     .then((res) => {
-      getAllImagesLog('resImagesList is %s', res);
+      downloadAllImagesLog('All images is downloaded');
       resolve(res);
     })
     .catch((err) => {
@@ -35,7 +35,6 @@ function getAllImages(list: [{name: string, url: string}]) {
     });
     // return [];
   });
-}
+};
 
-
-export default getAllImages;
+export default downloadAllImages;
