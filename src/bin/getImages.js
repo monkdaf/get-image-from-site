@@ -8,12 +8,10 @@ import getAllImages from '../getAllImages';
 import getAllProducts from '../getAllProducts';
 // import downloadAllImages from '../downloadAllImages';
 import downloadImages from '../downloadImages';
-// import getCountPages from '../getCountPages';
+import getCountPages from '../getCountPages';
 
-// console.log(half(Number(process.argv[process.argv.length - 1])));
-// console.log(`Arguments is (${process.argv.length}) ${process.argv}`);
 const INTERVAL_MS = 50;
-const PAGES = 1;
+// const PAGES = 1;
 
 const command = process.argv[2];
 const path = process.argv[3];
@@ -24,15 +22,17 @@ const errorLog = debug('error');
 
 if (command === 'list') {
   getImagesLog('Start');
-  getAllProducts(path, PAGES, [])
+  getCountPages(path)
+  .then((pages) => {
+    getImagesLog(`pages=${pages}`);
+    return getAllProducts(path, pages, []);
+  })
   .then((list) => {
     getImagesLog('Count of products: %s', list.length);
     return getAllImages(list);
   })
   .then((list) => {
     getImagesLog('Count of images: %s', list.length);
-    // getImagesLog('list of images: %s', list[0].name);
-    // console.log(list);
     return list;
   })
   // .then(list => downloadAllImages(list))
@@ -41,36 +41,10 @@ if (command === 'list') {
     if (list.count === 0) {
       throw new Error('No iages');
     }
-  // getImagesLog('first image is %s', list[0].name);
-  // downloadAllImages(list);
     downloadImages(list, INTERVAL_MS);
-  // return JSON.stringify(res, null, ' ');
-  // return getMaxImage(res.items[0]);
   })
-  // .then(list => getImagesLog('Count of products: ', list.length))
-  // .then(list => getAllImages(list))
-  // console.log(`Answer: ${getAllProducts(patch, 2, [])}`);
-
-  // // fetch(patch)
-  // .then(res => res.text())
-  // .then(body => getImageList(body))
-  // .then((arr) => {
-  //   getImagesLog('get array with lists');
-  //   getImagesLog('array => JSON is:\r\n%s', JSON.stringify(arr, null, ' '));
-  //   // console.log(arr);
-  //   // console.log(JSON.stringify(arr, null, ' '));
-  //   // console.log(JSON.stringify(arr));
-  //   return JSON.stringify(arr, null, ' ');
-  // })
-  // .then((json) => {
-  //   fs.writeFile('temp/list.json', json, (err) => {
-  //     if (err) throw err;
-  //     getImagesLog('list.json is saved!');
-  //   });
-  // })
   .catch((err) => {
     errorLog('Error is %s', err);
-    // console.error(err);
   });
 }
 
