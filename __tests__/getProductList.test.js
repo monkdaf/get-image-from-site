@@ -17,7 +17,7 @@ describe('Tests for getProductList', () => {
   `;
   const oneTagReturn =
     [
-      { name: 'giroskuter-hoverbot-a8-ugolno-chernyy', url: '/product/giroskuter-hoverbot-a8-ugolno-chernyy' },
+      { name: 'giroskuter-hoverbot-a8-ugolno-chernyy', url: 'http://gyrotown.ru/product/giroskuter-hoverbot-a8-ugolno-chernyy' },
     ];
   test('body have only one right tag', () => {
     expect(JSON.stringify(getProductList(oneTag))).toBe(JSON.stringify(oneTagReturn));
@@ -29,8 +29,8 @@ describe('Tests for getProductList', () => {
   `;
   const twoTagReturn =
     [
-      { name: 'giroskuter-hoverbot-a8-ugolno-chernyy', url: '/product/giroskuter-hoverbot-a8-ugolno-chernyy' },
-      { name: 'giroskuter-hoverbot-b-9-kamuflyazh', url: '/product/giroskuter-hoverbot-b-9-kamuflyazh' },
+      { name: 'giroskuter-hoverbot-a8-ugolno-chernyy', url: 'http://gyrotown.ru/product/giroskuter-hoverbot-a8-ugolno-chernyy' },
+      { name: 'giroskuter-hoverbot-b-9-kamuflyazh', url: 'http://gyrotown.ru/product/giroskuter-hoverbot-b-9-kamuflyazh' },
     ];
   test('body have only two right tag', () => {
     expect(JSON.stringify(getProductList(twoTag))).toBe(JSON.stringify(twoTagReturn));

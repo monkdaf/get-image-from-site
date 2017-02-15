@@ -6,11 +6,15 @@ import debug from 'debug';
 // import fs from 'fs';
 import getAllImages from '../getAllImages';
 import getAllProducts from '../getAllProducts';
-import downloadAllImages from '../downloadAllImages';
+// import downloadAllImages from '../downloadAllImages';
+import downloadImages from '../downloadImages';
 // import getCountPages from '../getCountPages';
 
 // console.log(half(Number(process.argv[process.argv.length - 1])));
 // console.log(`Arguments is (${process.argv.length}) ${process.argv}`);
+const INTERVAL_MS = 50;
+const PAGES = 1;
+
 const command = process.argv[2];
 const path = process.argv[3];
 
@@ -20,7 +24,7 @@ const errorLog = debug('error');
 
 if (command === 'list') {
   getImagesLog('Start');
-  getAllProducts(path, 7, [])
+  getAllProducts(path, PAGES, [])
   .then((list) => {
     getImagesLog('Count of products: %s', list.length);
     return getAllImages(list);
@@ -31,7 +35,18 @@ if (command === 'list') {
     // console.log(list);
     return list;
   })
-  .then(list => downloadAllImages(list))
+  // .then(list => downloadAllImages(list))
+  .then((list) => {
+    getImagesLog('Total count of images : %s', list.length);
+    if (list.count === 0) {
+      throw new Error('No iages');
+    }
+  // getImagesLog('first image is %s', list[0].name);
+  // downloadAllImages(list);
+    downloadImages(list, INTERVAL_MS);
+  // return JSON.stringify(res, null, ' ');
+  // return getMaxImage(res.items[0]);
+  })
   // .then(list => getImagesLog('Count of products: ', list.length))
   // .then(list => getAllImages(list))
   // console.log(`Answer: ${getAllProducts(patch, 2, [])}`);

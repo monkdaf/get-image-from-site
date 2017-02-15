@@ -26,7 +26,7 @@ describe('Tests for getImageList', () => {
       { name: 'giroskuter-hoverbot-a8-ugolno-chernyy-1_0.jpg', url: 'https://static-eu.insales.ru/images/products/1/6591/93977023/giroskuter-hoverbot-a8-ugolno-chernyy-1.jpg' },
     ];
   test('body have only one right tag', () => {
-    expect(JSON.stringify(getImageList(oneTag))).toBe(JSON.stringify(oneTagReturn));
+    expect(JSON.stringify(getImageList('giroskuter-hoverbot-a8-ugolno-chernyy-1', oneTag))).toBe(JSON.stringify(oneTagReturn));
   });
 
   const twoTag = `<div class="item">
@@ -54,6 +54,6 @@ describe('Tests for getImageList', () => {
       { name: 'giroskuter-hoverbot-a8-ugolno-chernyy-1_1.jpg', url: 'https://static-eu.insales.ru/images/products/1/4564/77173204/giroskuter-hoverbot-a8-ugolno-chernyy-1.jpg' },
     ];
   test('body have only two right tag', () => {
-    expect(JSON.stringify(getImageList(twoTag))).toBe(JSON.stringify(twoTagReturn));
+    expect(JSON.stringify(getImageList('giroskuter-hoverbot-a8-ugolno-chernyy-1', twoTag))).toBe(JSON.stringify(twoTagReturn));
   });
 });

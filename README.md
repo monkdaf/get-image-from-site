@@ -9,7 +9,7 @@ make install
 
 ## Main task (25.01.2017)
 Need get some images from gyrotown.ru
-Main goal is "http://gyrotown.ru/collection/giroskuter/hoverbot"
+Main goal is "http://gyrotown.ru/collection/giroskuter"
 
 ### count of pages
  В `<div class="pagination-container">` в `<ul class="list-inline list-unstyled">`
