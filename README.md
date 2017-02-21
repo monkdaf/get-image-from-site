@@ -7,6 +7,18 @@ Get some images from some sites
 make install
 ```
 
+## Run
+
+### Minimal debug
+```
+DEBUG=error,getImages,downloadImages,getCountPages make run
+```
+
+### Full debug
+```
+DEBUG=error,getImages,downloadImages,getCountPages,downloadAllImages,downloadImage,getAllImages,getAllProducts,getImageList,getImageListFromUrl,getProductList make run
+```
+
 ## Main task (25.01.2017)
 Need get some images from gyrotown.ru
 Main goal is "http://gyrotown.ru/collection/giroskuter"

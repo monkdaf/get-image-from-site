@@ -6,7 +6,7 @@ import debug from 'debug';
 import urlapi from 'url';
 
 const getProductListLog = debug('getProductList');
-
+const BASE_URL = 'http://gyrotown.ru';
 /**
  * Get list of products from html data.
  * @param {string} html Input html data
@@ -27,7 +27,7 @@ const getProductList = (html: string) => {
   links.each((i, link) => {
     let url = $(link).attr('href');
     if (/http/.exec(url) === null) {
-      url = `http://gyrotown.ru${url}`;
+      url = `${BASE_URL}${url}`;
     }
     const path = urlapi.parse(url).pathname;
     const name = !path ? '' : path.split('/').pop();

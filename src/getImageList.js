@@ -6,6 +6,7 @@ import debug from 'debug';
 import urlapi from 'url';
 
 const getImageListLog = debug('getImageList');
+const BASE_URL = 'http://gyrotown.ru';
 
 /**
  * Get list of images from html data.
@@ -25,7 +26,10 @@ const getImageList = (nameProduct:string, html: string) => {
   const links = $('a[data-zoom-id=zoom]');
 
   links.each((i, link) => {
-    const url = $(link).attr('href');
+    let url = $(link).attr('href');
+    if (/http/.exec(url) === null) {
+      url = `${BASE_URL}${url}`;
+    }
     const path = urlapi.parse(url).pathname;
     const namefile = !path ? '' : path.split('/').pop().split('.');
     // const name = `${namefile[0]}_${i}.${namefile[1]}`;
