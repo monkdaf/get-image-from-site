@@ -4,7 +4,7 @@ outImages*
 get-image-from-site*
 get-i
 /node_modules/
-*.log
+*.zip
 dist
 flow-typed
 .tern-port

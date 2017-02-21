@@ -3,14 +3,14 @@
 
 // import fetch from 'node-fetch';
 import debug from 'debug';
-// import fs from 'fs';
+import fs from 'fs';
 import getAllImages from '../getAllImages';
 import getAllProducts from '../getAllProducts';
 // import downloadAllImages from '../downloadAllImages';
 import downloadImages from '../downloadImages';
 import getCountPages from '../getCountPages';
 
-const INTERVAL_MS = 50;
+const INTERVAL_MS = 70;
 // const PAGES = 1;
 
 const command = process.argv[2];
@@ -19,6 +19,11 @@ const path = process.argv[3];
 const getImagesLog = debug('getImages');
 const errorLog = debug('error');
 
+fs.access('outImages', fs.constants.F_OK, (err) => {
+  if (err) {
+    fs.mkdirSync('outImages');
+  }
+});
 
 if (command === 'list') {
   getImagesLog('Start');

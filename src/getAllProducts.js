@@ -36,7 +36,7 @@ const getAllProducts = (url: string, page: number, prevList: [{name: string, url
       return getAllProducts(url, page - 1, prevList.concat(list));
     })
     .then((list) => {
-      getAllProductsLog('commonlist is %s', JSON.stringify(list, null, ' '));
+      // getAllProductsLog('commonlist is %s', JSON.stringify(list, null, ' '));
       resolve(list);
       // return list;
     })
